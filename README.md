@@ -1,8 +1,8 @@
-## Pic-less 
+# Pic-less 
 
-# Overview
+## Overview
 
-# Technologies Used
+## Technologies Used
 
 <ul>
 <li> Javascript
