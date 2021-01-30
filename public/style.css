@@ -1,0 +1,11 @@
+.navbar {
+  color: white;
+  padding: 0 5px;
+}
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
