@@ -1,16 +1,133 @@
-const showProfile = (req, res) => {
-  res.render("user/profile", {
+const { User } = require("../models");
+const bcrypt = require("bcrypt");
+
+/* Presentational/Main */
+const showLogin = (req, res) => {
+  //   console.log(req.session);
+  //   console.log(req.user);
+  res.render("user/login", {
     user: req.user,
+    title: "Log In",
+    message: "",
   });
 };
 
-const login = (req, res) => {
-  res.render("user/login", {
-    user: req.user,
+/* Functional */
+const loginForm = (req, res) => {
+  if (req.body.username === "" || req.body.password === "")
+    return res.render("user/login", {
+      user: req.user,
+      title: "Log In",
+      message: "Please fill out username and password",
+    });
+
+  User.findOne({ username: req.body.username }, (err, foundAUser) => {
+    if (err)
+      return res.render("user/login", {
+        user: req.user,
+        title: "Log In",
+        message: "err finding user",
+      });
+
+    if (!foundAUser)
+      return res.render("user/login", {
+        user: req.user,
+        title: "Log In",
+        message: "err couldn't find a user",
+      });
+
+    bcrypt.compare(req.body.password, foundAUser.password, (err, match) => {
+      if (err)
+        return res.render("user/login", {
+          user: req.user,
+          title: "Log In",
+          message: "err bcrypt compare",
+        });
+
+      if (!match)
+        return res.render("user/login", {
+          user: req.user,
+          title: "Log In",
+          message: "password invalid",
+        });
+      req.session.currentUser = {
+        firstName: foundAUser.firstName,
+        lastName: foundAUser.lastName,
+        username: foundAUser.username,
+        profilePic: foundAUser.profilePic,
+        userId: foundAUser._id,
+      };
+      console.log(req.session.currentUser);
+      res.redirect("/home");
+    });
   });
+};
+
+/* Presentational */
+const showRegister = (req, res) => {
+  res.render("user/register", {
+    title: "Register",
+    user: req.user,
+    message: "",
+  });
+};
+
+const newUserForm = (req, res) => {
+  User.findOne({ email: req.body.email }, (err, foundAUser) => {
+    if (err) return console.log(err);
+
+    console.log("Found user");
+
+    if (foundAUser)
+      return res.render("user/register", {
+        title: "Register",
+        user: req.user,
+        message: "This account already exists",
+      });
+
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) return console.log(err);
+
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        if (err) return console.log(err);
+
+        req.body.password = hash;
+
+        User.create(req.body, (err, createdAUser) => {
+          if (err) return console.log(err);
+
+          console.log(createdAUser);
+
+          res.redirect("/user/login");
+        });
+      });
+    });
+  });
+};
+
+/* Presentational */
+const showProfile = (req, res) => {
+  console.log(req.user);
+  const id = req.params.googleId;
+  User.findById(id, (err, user) => {
+    if (err) return console.log(err);
+
+    const context = {
+      user: req.user,
+    };
+    res.render("user/profile", context);
+  });
+};
+
+const logout = (req, res) => {
+  res.render("user/logout");
 };
 
 module.exports = {
-  login,
-  profile: showProfile,
+  showLogin,
+  loginForm,
+  showProfile,
+  showRegister,
+  newUserForm,
+  logout,
 };

@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<div class="welcome">
+  <div class="container d-flex flex-column align-items-center">
+    <h1><%= title %></h1>
+
+    <form action="/user/newuser" method="POST">
+      <p><%=message%></p>
+      <input type="text" name="firstName" required placeholder="First Name" />
+      <input type="text" name="lastName" required placeholder="Last Name" />
+      <input type="text" name="email" required placeholder="Email" />
+      <input type="text" name="username" required placeholder="username" />
+      <input type="text" name="password" required placeholder="password" />
+      <input type="submit" val="Sign up" />
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

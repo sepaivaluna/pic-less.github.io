@@ -1,14 +1,16 @@
-const { User, Post } = require('../models')
+const { User, Post } = require("../models");
 
 const showHome = (req, res) => {
+  Post.find({})
+    .populate("user")
+    .exec((err, posts) => {
+      console.log(posts);
+    });
 
-    Post.find({}).populate('user').exec((err,posts) => {
-        console.log(req.session.passport.user)
-    })
-    
-  res.render("home/index", {
-    user: req.user,
-  });
+  const context = {
+    user: req.session.currentUser,
+  };
+  res.render("home/index", context);
 };
 
 module.exports = {

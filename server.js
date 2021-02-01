@@ -2,15 +2,16 @@
 const express = require("express");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
+const logger = require("./middleware/index");
 
 /* Internal Modules */
 const { landingRouter, userRouter, commentRouter, postRouter, homeRouter } = require("./routes");
 
 /* Port */
-const PORT = 3000;
-
 require("dotenv").config();
+const PORT = process.env.PORT;
 
 /* App instance */
 const app = express();
@@ -30,11 +31,22 @@ app.use(methodOverride("_method"));
 
 app.use(
   session({
-    secret: "YouAreTheOne",
+    store: new MongoStore({ url: process.env.MONGODB_URI }),
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 24 * 7 * 2,
+    },
   })
 );
+
+app.use(logger);
+
+app.use((req, res, next) => {
+  app.locals.currentUser = req.session.currentUser;
+  next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

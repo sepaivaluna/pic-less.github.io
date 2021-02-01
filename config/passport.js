@@ -2,7 +2,7 @@ const passport = require("passport");
 
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-const User = require("../models/User");
+const { User } = require("../models");
 
 passport.use(
   new GoogleStrategy(
@@ -13,7 +13,7 @@ passport.use(
     },
 
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
+      console.log("This is the profile: " + profile);
       User.findOne({ googleId: profile.id }, function (err, user) {
         if (err) return cb(err);
         if (user) {

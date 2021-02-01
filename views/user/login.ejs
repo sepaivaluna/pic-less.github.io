@@ -1,22 +1,32 @@
 <%- include('../partials/header') %>
 
 <div class="welcome">
-  <div class="container d-flex flex-column align-items-center">
-    <h4>Welcome to Pic-Less, a fun way to view your friend's posts or hide them without them knowing it!</h4>
+  <div class="container d-flex flex-column">
+    <!-- <h4>Welcome to Pic-Less, a fun way to view your friend's posts or hide them without them knowing it!</h4> -->
     <label>
-      <h3 class="text-center">Please log in:</h3>
-      <form action="">
-        <input type="text" name="username" placeholder="username" />
-        <input type="text" name="password" placeholder="password" />
-        <input type="submit" val="Log in" />
-      </form>
+      <h3><%= title %></h3>
+      <p><%=message%></p>
     </label>
+    <form action="/user/loginform" method="POST">
+      <input type="username" name="username" placeholder="username" />
 
-    <!-- <label>
-      <h4>If you don't have an account click <a href="#">Here</a></h4>
-    </label> -->
+      <input type="password" name="password" placeholder="password" />
 
-    <a href="/auth/google">CLICK ME FOR GOOGLE</a>
+      <input type="submit" val="Log in" />
+    </form>
+    <br />
+
+    <label>
+      <h4>Use google to log in</h4>
+    </label>
+    <form action="/auth/google">
+      <button>Log in with Google</button>
+    </form>
+    <br />
+
+    <label>
+      <h4>If you don't have an account click <a href="/user/register">Here</a></h4>
+    </label>
   </div>
 </div>
 

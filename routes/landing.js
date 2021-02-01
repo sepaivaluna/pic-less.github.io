@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-router.get('/', (req, res) => {
-  res.redirect('/user/login')
-})
+router.get("/", (req, res) => {
+  res.redirect("/user/login");
+});
 
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
@@ -17,7 +17,11 @@ router.get(
 
 router.get("/logout", function (req, res) {
   req.logout();
-  res.redirect("/");
+  req.session.destroy((err) => {
+    if (err) return res.redirect("/user/login");
+
+    res.redirect("/user/logout");
+  });
 });
 
 module.exports = router;
