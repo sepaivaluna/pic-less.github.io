@@ -55,6 +55,8 @@ app.use(passport.session());
 app.use("/", landingRouter);
 app.use("/home", homeRouter);
 app.use("/user", userRouter);
+app.use("/", postRouter);
+app.use("/", commentRouter);
 
 /* App listen */
 app.listen(PORT, () => console.log(`listening at port ${PORT} \nhttp://localhost:${PORT}`));

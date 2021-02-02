@@ -3,8 +3,7 @@ const bcrypt = require("bcrypt");
 
 /* Presentational/Main */
 const showLogin = (req, res) => {
-  //   console.log(req.session);
-  //   console.log(req.user);
+  console.log(req.user);
   res.render("user/login", {
     user: req.user,
     title: "Log In",
@@ -35,6 +34,7 @@ const loginForm = (req, res) => {
         title: "Log In",
         message: "err couldn't find a user",
       });
+    console.log(foundAUser);
 
     bcrypt.compare(req.body.password, foundAUser.password, (err, match) => {
       if (err)
@@ -108,8 +108,8 @@ const newUserForm = (req, res) => {
 /* Presentational */
 const showProfile = (req, res) => {
   console.log(req.user);
-  const id = req.params.googleId;
-  User.findById(id, (err, user) => {
+  const id = req.params.userId;
+  User.findById(id, (err, foundUser) => {
     if (err) return console.log(err);
 
     const context = {

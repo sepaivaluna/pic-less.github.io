@@ -19,14 +19,14 @@
       <div class="container fluid">
         <h2>Pic-Less</h2>
         <% if (user) { %>
-        <form action="/logout">
-          <button type="submit">Log out</button>
-        </form>
-        <form action="/user/:userId/profile">
-          <button type="submit">Profile</button>
-        </form>
+          <form action="/user/<%= user._id %>/profile">
+            <button type="submit">Profile</button>
+          </form>
+          <form action="/logout">
+            <button type="submit">Log out</button>
+          </form>
+          <img id="small-profile" src="<%= user.profilePic %>" />
         <% } %>
       </div>
     </nav>
-  </body>
-</html>
+
