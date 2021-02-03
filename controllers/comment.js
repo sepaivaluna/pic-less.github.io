@@ -2,7 +2,7 @@ const { Comment, Post, User } = require("../models");
 
 /* Presentational */
 const newComment = (req, res) => {
-  Post.findById(req.params.postId, (err, foundPost) => {
+  Post.findById(req.params.postId, (err) => {
     if (err) return console.log(err);
   })
     .populate("comments")

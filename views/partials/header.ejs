@@ -10,28 +10,41 @@
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
       crossorigin="anonymous"
     />
+
+    <!-- NOTE FontAwesome css -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
     <!-- NOTE Main css -->
     <link rel="stylesheet" href="/style.css" />
     <title>Pic-Less</title>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-      <div class="container fluid">
-        <h2>Pic-Less</h2>
-        <form action="/home">
-          <button type="submit" class="btn btn-secondary">Home</button>
+    <nav class="navbar sticky-top navbar-dark bg-dark d-flex justify-content-between">
+      <% if (user) { %>
+      <form action="/home">
+        <button id="home-button">
+          <i class="fas fa-home"></i>
+          Pic-Less
+        </button>
+      </form>
+      <% } %> <% if (user) { %>
+      <div id="nav-buttons" class="d-flex">
+        <h2 class="welcome-user">Welcome <%=user.firstName%>!</h2>
+        <form class="m-1" action="/<%= user._id %>/new-post">
+          <button type="submit" class="btn btn-success"><i class="fas fa-plus-square"></i> New Post</button>
         </form>
-        <% if (user) { %>
-          <form action="/user/<%= user._id %>/profile">
-            <button type="submit" class="btn btn-secondary">Profile</button>
-          </form>
-          <form action="/<%= user._id %>/new-post">
-            <button type="submit" class="btn btn-success">Create New Post</button>
-          </form>
-          <form action="/logout">
-            <button type="submit" class="btn btn-danger">Log out</button>
-          </form>
-          <!-- <img id="small-profile" src="<%# user.profilePic %>" /> -->
-        <% } %>
+        <form class="m-1" action="/user/<%= user._id %>/profile">
+          <button type="submit" class="btn btn-secondary"><i class="fas fa-user-alt"></i> Profile</button>
+        </form>
+        <form class="m-1" action="/logout">
+          <button type="submit" class="btn btn-danger">Log out <i class="fas fa-sign-out-alt"></i></button>
+        </form>
       </div>
+      <% } %>
     </nav>
+  </body>
+</html>

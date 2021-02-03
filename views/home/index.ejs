@@ -1,26 +1,17 @@
 <%- include('../partials/header') %>
 
-
 <div class="container d-flex flex-column align-items-center">
-
-  <!-- <div class="mt-4">
-      <form action="/<%# user._id %>/new-post">
-        <button type="submit" class="btn btn-success">Create New Post</button>
-      </form>
-  </div> -->
-
-  <% users.forEach(person => { %> 
-    
-    <% person.posts.forEach(post => { %>
-    <div id="post-container">
-      <p class="text-center"><%= person.firstName %>'s Post:</p>
-      <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px;" />
-      <div>
-        <p class="text-center"><%= post.caption %></p>
-        <a class="text-center" href="/<%=post._id%>/comments">View comments</a>
-      </div>
+  <% users.forEach(person => { %> <% person.posts.forEach(post => { %>
+  <div id="post-container">
+    <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px" />
+    <blockquote class="blockquote text-center">
+      <p><%= post.caption %></p>
+      <footer class="blockquote-footer"><cite><%= person.firstName %> <%= person.lastName %></cite></footer>
+    </blockquote>
+    <div class="text-center">
+      <a href="/<%=post._id%>/comments">View comments</a>
     </div>
-    <% }); %>
-  <% }); %>
+  </div>
+  <% }); %> <% }); %>
 </div>
 <%- include('../partials/footer') %>

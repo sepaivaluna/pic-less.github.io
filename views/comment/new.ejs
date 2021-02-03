@@ -1,17 +1,14 @@
+<%- include('../partials/header') %>
+
 <h1>Add Comment</h1>
 
 <form action="/<%= user._id %>/<%= post._id %>/add-comment" method="POST">
-    <textarea name="content" cols="30" rows="5" placeholder="Type comment..."></textarea>
-    <button type="submit">Save</button>
+  <textarea name="content" cols="30" rows="5" placeholder="Type comment..."></textarea>
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-
 <% post.comments.forEach(c => { %>
-    <ul>
-        <li><%= c.content %></li>
-    </ul>
-<% }); %>
-    
-
-
-<a href="/home">Return</a>
+<ul class="container m-4">
+  <li><%= post.user %>: <%= c.content %></li>
+</ul>
+<% }); %> <%- include('../partials/footer') %>
