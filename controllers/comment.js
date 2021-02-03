@@ -1,6 +1,7 @@
 const { Comment, Post, User } = require("../models");
 
 /* Presentational */
+
 const newComment = (req, res) => {
   Post.findById(req.params.postId, (err) => {
     if (err) return console.log(err);
@@ -20,13 +21,19 @@ const newComment = (req, res) => {
 
 const createComment = (req, res) => {
   Post.findById(req.params.postId, (err, foundPost) => {
-    if (err) return console.log(err);
-    Comment.create(req.body, (err, createdComment) => {
-      foundPost.comments.push(createdComment._id);
-      foundPost.save();
+    Comment.create(
+      {
+        content: req.body.content,
+        user: req.user,
+      },
+      (err, createdComment) => {
+        foundPost.comments.push(createdComment._id);
+        foundPost.save();
 
-      res.redirect(`/${foundPost._id}/comments`);
-    });
+        res.redirect(`/${foundPost._id}/comments`);
+        console.log(foundPost);
+      }
+    );
   });
 };
 

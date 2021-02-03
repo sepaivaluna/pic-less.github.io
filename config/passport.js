@@ -13,7 +13,7 @@ passport.use(
     },
 
     function (accessToken, refreshToken, profile, cb) {
-      console.log("This is the profile: " + profile);
+      console.log(profile);
       User.findOne({ googleId: profile.id }, function (err, user) {
         if (err) return cb(err);
         if (user) {
@@ -24,6 +24,7 @@ passport.use(
             lastName: profile.name.familyName,
             email: profile.emails[0].value,
             googleId: profile.id,
+            profilePic: profile.photos[0].value,
           });
           newUser.save(function (err) {
             if (err) return cb(err);

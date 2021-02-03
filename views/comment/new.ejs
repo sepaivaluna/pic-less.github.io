@@ -9,6 +9,6 @@
 
 <% post.comments.forEach(c => { %>
 <ul class="container m-4">
-  <li><%= post.user %>: <%= c.content %></li>
+  <li><%= c.user %>: <%= c.content %></li>
 </ul>
 <% }); %> <%- include('../partials/footer') %>
