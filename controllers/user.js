@@ -33,7 +33,6 @@ const loginForm = (req, res) => {
         title: "Log In",
         message: "err couldn't find a user",
       });
-    console.log(foundAUser);
 
     bcrypt.compare(req.body.password, foundAUser.password, (err, match) => {
       if (err)
@@ -50,8 +49,19 @@ const loginForm = (req, res) => {
           message: "password invalid",
         });
       req.user = foundAUser;
-
-      res.render("home/index", { user: foundAUser });
+      User.find({})
+      .populate("posts")
+      .exec((err, users) => {
+        if (err) return console.log(err);
+  
+        const context = {
+          users,
+          user: foundAUser,
+        };
+        // console.log(users);
+        res.render("home/index", context);
+      });
+      // res.render("home/index", { user: foundAUser });
     });
   });
 };
@@ -89,8 +99,6 @@ const newUserForm = (req, res) => {
         User.create(req.body, (err, createdAUser) => {
           if (err) return console.log(err);
 
-          console.log(createdAUser);
-
           res.redirect("/user/login");
         });
       });
@@ -100,17 +108,21 @@ const newUserForm = (req, res) => {
 
 /* Presentational */
 const showProfile = (req, res) => {
-  console.log(req.user);
-  const id = req.params.userId;
-  User.findById(id, (err, foundUser) => {
+  User.findById(req.params.userId, (err, foundUser) => {
     if (err) return console.log(err);
+  })
+    .populate("posts")
+    .exec((err, posts) => {
+      if (err) return console.log(err);
 
-    const context = {
-      user: req.user,
-    };
-    res.render("user/profile", context);
-  });
+      const context = {
+        user: req.user,
+        posts,
+      };
+      res.render("user/profile", context);
+    });
 };
+
 
 const logout = (req, res) => {
   res.render("user/logout");

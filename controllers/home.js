@@ -31,6 +31,7 @@ const showHome = (req, res) => {
       console.log(users);
       res.render("home/index", context);
     });
+    console.log(req.user, "user");
 };
 
 module.exports = {

@@ -6,6 +6,11 @@
 </form>
 
 
+<% post.comments.forEach(c => { %>
+    <ul>
+        <li><%= c.content %></li>
+    </ul>
+<% }); %>
     
 
 
