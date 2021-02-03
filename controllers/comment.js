@@ -1,12 +1,16 @@
 const { Comment, Post, User } = require("../models");
 
 /* Presentational */
-
 const newComment = (req, res) => {
   Post.findById(req.params.postId, (err) => {
     if (err) return console.log(err);
   })
-    .populate("comments")
+    .populate({
+      path: 'comments',
+      populate : {
+        path: 'user',
+      }
+    })
     .exec((err, thisPost) => {
       if (err) return console.log(err);
 
@@ -14,27 +18,27 @@ const newComment = (req, res) => {
         user: req.user,
         post: thisPost,
       };
-      console.log(thisPost);
+      console.log("This is what i get from populating comments on a post", thisPost);
       res.render("comment/new", context);
     });
 };
 
 const createComment = (req, res) => {
-  Post.findById(req.params.postId, (err, foundPost) => {
-    Comment.create(
-      {
+  User.findById(req.user._id, (err, foundUser) => {
+    Post.findById(req.params.postId, (err, foundPost) => {
+      Comment.create({
         content: req.body.content,
-        user: req.user,
+        user: foundUser,
       },
       (err, createdComment) => {
         foundPost.comments.push(createdComment._id);
         foundPost.save();
 
         res.redirect(`/${foundPost._id}/comments`);
-        console.log(foundPost);
-      }
-    );
-  });
+        console.log("This is what i get from saving the comments into the post", foundPost);
+      })
+    })
+  })
 };
 
 module.exports = {

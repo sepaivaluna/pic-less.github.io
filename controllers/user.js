@@ -107,18 +107,49 @@ const newUserForm = (req, res) => {
 };
 
 /* Presentational */
+// const showProfile = (req, res) => {
+//   User.findById(req.params.userId, (err) => {
+//     if (err) return console.log(err);
+//   })
+//     .populate("posts")
+//     .exec((err, users) => {
+//       if (err) return console.log(err);
+
+//       const context = {
+//         user: req.user,
+//         users,
+//       };
+//       console.log("this is what i get when i log user:", req.user)
+//       console.log("this is what i get when i populate users", users)
+//       res.render("user/profile", context);
+//     });
+// };
 const showProfile = (req, res) => {
-  User.findById(req.params.userId, (err, foundUser) => {
+  User.findById(req.params.userId, (err) => {
     if (err) return console.log(err);
   })
-    .populate("posts")
-    .exec((err, posts) => {
+    .populate({
+      path: "posts",
+      populate: {
+        path: 'comments',
+        populate: {
+          path: 'user',
+        }
+      }
+    })
+    .exec((err, users) => {
       if (err) return console.log(err);
 
       const context = {
         user: req.user,
-        posts,
+        users,
+        title: 'Profile'
       };
+      // console.log("this is what i get when i log req.user:", req.user)
+      // console.log("this is what i get when i populate users", users)
+      // console.log("this is what i get when i log users.posts", users.posts)
+      // console.log("this is what i get when i log users.posts.comments", users.posts[0].comments)
+
       res.render("user/profile", context);
     });
 };

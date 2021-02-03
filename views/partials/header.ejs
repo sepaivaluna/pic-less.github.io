@@ -27,7 +27,7 @@
       <% if (user) { %>
       <form action="/home">
         <button id="home-button">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-camera-retro"></i>
           Pic-Less
         </button>
       </form>
@@ -43,7 +43,8 @@
         <form class="m-1" action="/logout">
           <button type="submit" class="btn btn-danger">Log out <i class="fas fa-sign-out-alt"></i></button>
         </form>
-        <img src="<%= user.profilePic %>" style="max-width: 50px; border-radius: 200px" />
+        
+        <img id="profile-pic" src="<%= user.profilePic %>" />
       </div>
       <% } %>
     </nav>

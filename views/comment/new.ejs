@@ -9,6 +9,12 @@
 
 <% post.comments.forEach(c => { %>
 <ul class="container m-4">
-  <li><%= c.user %>: <%= c.content %></li>
+  <li><%= c.user.firstName %> <%= c.user.lastName %>: <%= c.content %>
+    <% if (user._id.equals(c.user._id)) { %>
+        <form action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+        </form>
+    <% } %>
+</li>
 </ul>
 <% }); %> <%- include('../partials/footer') %>

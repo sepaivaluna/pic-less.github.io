@@ -33,11 +33,25 @@
   width: 30px;
 }
 
+#profile-pic {
+  max-width: 41px;
+  max-height: 41px;
+  border-radius: 200px;
+  margin: 2px;
+}
+
 body {
   background: url("https://wallpaperaccess.com/full/1209558.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.post-icons {
+  border: none; 
+  background-color: transparent; 
+  color: rgb(59, 0, 0); 
+  font-size: 24px;
 }
 
 #logout-body {

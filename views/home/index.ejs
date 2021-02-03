@@ -1,16 +1,25 @@
 <%- include('../partials/header') %>
 
 <div class="container d-flex flex-column align-items-center">
-  <% users.forEach(person => { %> <% person.posts.forEach(post => { %>
-  <div id="post-container">
+  <% users.forEach(person => { %> 
+   <% person.posts.forEach(post => { %>
+   <div id="post-container">
     <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px" />
+    <div class="d-flex">
+      <form action="">
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like"><i class="far fa-heart"></i></button>
+      </form>
+      <form action="/<%=post._id%>/comments" alt="view comments">
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Comments"><i class="far fa-comment"></i></button>
+      </form>
+      <form class="align-self-end" action="">
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide post"><i class="far fa-eye-slash"></i></button>
+      </form>
+    </div>
     <blockquote class="blockquote text-center">
       <p><%= post.caption %></p>
       <footer class="blockquote-footer"><cite><%= person.firstName %> <%= person.lastName %></cite></footer>
     </blockquote>
-    <div class="text-center">
-      <a href="/<%=post._id%>/comments">View comments</a>
-    </div>
   </div>
   <% }); %> <% }); %>
 </div>
