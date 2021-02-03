@@ -15,18 +15,23 @@
     <title>Pic-Less</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
       <div class="container fluid">
         <h2>Pic-Less</h2>
+        <form action="/home">
+          <button type="submit" class="btn btn-secondary">Home</button>
+        </form>
         <% if (user) { %>
           <form action="/user/<%= user._id %>/profile">
-            <button type="submit">Profile</button>
+            <button type="submit" class="btn btn-secondary">Profile</button>
+          </form>
+          <form action="/<%= user._id %>/new-post">
+            <button type="submit" class="btn btn-success">Create New Post</button>
           </form>
           <form action="/logout">
-            <button type="submit">Log out</button>
+            <button type="submit" class="btn btn-danger">Log out</button>
           </form>
-          <img id="small-profile" src="<%= user.profilePic %>" />
+          <!-- <img id="small-profile" src="<%# user.profilePic %>" /> -->
         <% } %>
       </div>
     </nav>
-

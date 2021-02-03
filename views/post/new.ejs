@@ -1,5 +1,15 @@
-<form action="/<%= user._id %>/add-post" method="POST">
-  <input type="text" name="img" placeholder="img-url" />
-  <input type="text" name="caption" placeholder="caption" />
-  <input type="submit" value="Add post" />
-</form>
+<%- include('../partials/header') %>
+
+<div
+  id="new-post-div"
+  class="container d-flex align-items-center justify-content-center"
+  style="margin: auto; height: 100vh"
+>
+  <form class="d-flex flex-column" action="/<%= user._id %>/add-post" method="POST">
+    <input type="text" name="img" placeholder="img-url" />
+    <textarea name="caption" cols="30" rows="5" placeholder="Type your caption..."></textarea>
+    <input type="submit" value="Add post" />
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

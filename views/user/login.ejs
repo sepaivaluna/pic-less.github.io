@@ -1,33 +1,33 @@
 <%- include('../partials/header') %>
 
 <div class="welcome">
-  <div class="container d-flex flex-column">
+  
     <!-- <h4>Welcome to Pic-Less, a fun way to view your friend's posts or hide them without them knowing it!</h4> -->
     <label>
-      <h3><%= title %></h3>
-      <p><%= message %></p>
+      <h3><%= title %>:</h3>
     </label>
-    <form action="/user/loginform" method="POST">
+    <!-- <p><%# message %></p> -->
+
+    <!-- <form action="/user/loginform" method="POST">
       <input type="username" name="username" placeholder="username" />
 
       <input type="password" name="password" placeholder="password" />
 
       <input type="submit" val="Log in" />
     </form>
-    <br />
-
-    <label>
+    <br /> -->
+    <div>
       <h4>Use google to log in</h4>
-    </label>
-    <form action="/auth/google">
-      <button>Log in with Google</button>
-    </form>
-    <br />
+      <form action="/auth/google">
+        <button class="btn btn-primary">Log in with Google</button>
+      </form>
+    </div>
 
-    <label>
-      <h4>If you don't have an account click <a href="/user/register">Here</a></h4>
-    </label>
-  </div>
+    <!-- <div>
+      <label>
+        <h4>If you don't have an account click <a href="/user/register">Here</a></h4>
+      </label>
+    </div> -->
 </div>
 
 <%- include('../partials/footer') %>

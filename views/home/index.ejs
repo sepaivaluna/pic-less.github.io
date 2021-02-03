@@ -1,27 +1,26 @@
 <%- include('../partials/header') %>
 
-<h1>Feed Page</h1>
 
-<% users.forEach(person => { %> 
-  
-  <% person.posts.forEach(post => { %>
-  <div class="d-flex container flex-column">
-    <p><%= person.firstName %>'s Post:</p>
-    <img src="<%= post.img %>" style="width: 520px" />
-    <div class="d-flex justify-content-between">
-      <p><%= post.caption %></p>
-      <p><a href="/<%=post._id%>/comments">View comments</a></p>
+<div class="container d-flex flex-column align-items-center">
+
+  <!-- <div class="mt-4">
+      <form action="/<%# user._id %>/new-post">
+        <button type="submit" class="btn btn-success">Create New Post</button>
+      </form>
+  </div> -->
+
+  <% users.forEach(person => { %> 
+    
+    <% person.posts.forEach(post => { %>
+    <div id="post-container">
+      <p class="text-center"><%= person.firstName %>'s Post:</p>
+      <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px;" />
+      <div>
+        <p class="text-center"><%= post.caption %></p>
+        <a class="text-center" href="/<%=post._id%>/comments">View comments</a>
+      </div>
     </div>
-  </div>
+    <% }); %>
   <% }); %>
-<% }); %>
-
-
-<div>
-  <h1>New post:</h1>
-  <form action="/<%= user._id %>/new-post">
-    <button type="submit">Create New Post</button>
-  </form>
 </div>
-
 <%- include('../partials/footer') %>
