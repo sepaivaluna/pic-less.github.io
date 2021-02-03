@@ -1,8 +1,7 @@
 <%- include('../partials/header') %>
 
 <div class="container d-flex flex-column align-items-center">
-  <% users.forEach(person => { %> 
-   <% person.posts.forEach(post => { %>
+  <% posts.forEach(post => { %> 
    <div id="post-container">
     <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px" />
     <div class="d-flex">
@@ -18,9 +17,9 @@
     </div>
     <blockquote class="blockquote text-center">
       <p><%= post.caption %></p>
-      <footer class="blockquote-footer"><cite><%= person.firstName %> <%= person.lastName %></cite></footer>
+      <footer class="blockquote-footer"><cite><%= post.user.firstName %> <%= post.user.lastName %></cite></footer>
     </blockquote>
   </div>
-  <% }); %> <% }); %>
+  <% }); %> 
 </div>
 <%- include('../partials/footer') %>

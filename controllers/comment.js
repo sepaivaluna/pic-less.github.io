@@ -41,7 +41,21 @@ const createComment = (req, res) => {
   })
 };
 
+const deleteComment = (req, res) => {
+  User.findById(req.params.userId, (err, foundUser) => {
+    Post.findById(req.params.postId, (err, foundPost) => {
+      Comment.findByIdAndDelete(req.params.commentId, (err, deletedComment) => {
+        if (err) console.log(err)
+
+        console.log("deleted the following comment: ", deletedComment);
+        res.redirect(`/${foundPost._id}/comments`);
+      })
+    })
+  })
+}
+
 module.exports = {
   newComment,
   createComment,
+  deleteComment,
 };

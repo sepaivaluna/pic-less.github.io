@@ -1,22 +1,21 @@
 const e = require("express");
 const { Comment, User, Post } = require("../models");
 
-/* This will populate all of the users and show their pictures w/ captions on the homepage */
-const showHome = (req, res) => {
-  User.find({})
-    .populate("posts")
-    .exec((err, users) => {
-      if (err) return console.log(err);
+/* This will populate all of the posts and show their pictures w/ captions on the homepage */
 
-      const context = {
-        users,
-        user: req.user,
-      };
-      console.log("This is what i get with users:" ,users);
-      res.render("home/index", context);
-    });
-    console.log("This is what i get with req.user:", req.user);
-};
+const showHome = (req, res) => {
+  Post.find({}).populate('user').sort({createdAt: -1}).exec((err, posts) => {
+    if (err) return console.log(err);
+
+    const context = {
+      posts,
+      user: req.user,
+    }
+    console.log("this is what i get with posts:", posts);
+    res.render('home/index', context);
+    console.log("logging all of the req", req)
+  })
+}
 
 module.exports = {
   show: showHome,
