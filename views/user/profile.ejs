@@ -1,5 +1,10 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header') %> <% if (user._id.equals(user && user._id)) { %>
 
 <h1>Welcome to your profile <%= user.firstName %></h1>
+<h3>View all of your posts here:</h3>
 
-<%- include('../partials/footer') %>
+<% user.posts.forEach(post => { %>
+
+<div><%= post.caption %></div>
+
+<% }); %> <% } %> <%- include('../partials/footer') %>

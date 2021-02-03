@@ -1,1 +1,12 @@
-<h1>Hello World</h1>
+<h1>Add Comment</h1>
+
+<form action="/<%= user._id %>/<%= post._id %>/add-comment" method="POST">
+    <textarea name="content" cols="30" rows="5" placeholder="Type comment..."></textarea>
+    <button type="submit">Save</button>
+</form>
+
+
+    
+
+
+<a href="/home">Return</a>

@@ -2,17 +2,20 @@
 
 <h1>Feed Page</h1>
 
-<% posts.forEach(post => { %>
-<div class="container">
-  <div>
-    <img src="<%= post.img %>" style="width: 400px" />
-    <div>
-      <span><%= post.caption %></span>
-      <span><a href="/<%= post._id %>/comments">Comments</a></span>
+<% users.forEach(person => { %> 
+  
+  <% person.posts.forEach(post => { %>
+  <div class="d-flex container flex-column">
+    <p><%= person.firstName %>'s Post:</p>
+    <img src="<%= post.img %>" style="width: 520px" />
+    <div class="d-flex justify-content-between">
+      <p><%= post.caption %></p>
+      <p><a href="/<%=post._id%>/comments">View comments</a></p>
     </div>
   </div>
-</div>
+  <% }); %>
 <% }); %>
+
 
 <div>
   <h1>New post:</h1>

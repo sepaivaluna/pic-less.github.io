@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 /* Presentational/Main */
 const showLogin = (req, res) => {
-  console.log(req.user);
   res.render("user/login", {
     user: req.user,
     title: "Log In",
@@ -50,15 +49,9 @@ const loginForm = (req, res) => {
           title: "Log In",
           message: "password invalid",
         });
-      req.session.currentUser = {
-        firstName: foundAUser.firstName,
-        lastName: foundAUser.lastName,
-        username: foundAUser.username,
-        profilePic: foundAUser.profilePic,
-        userId: foundAUser._id,
-      };
-      console.log(req.session.currentUser);
-      res.redirect("/home");
+      req.user = foundAUser;
+
+      res.render("home/index", { user: foundAUser });
     });
   });
 };
