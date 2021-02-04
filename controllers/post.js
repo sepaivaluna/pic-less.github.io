@@ -1,4 +1,4 @@
-const { Post, User } = require("../models");
+const { Post, User, Like } = require("../models");
 const user = require("./user");
 
 /* Presentational */
@@ -43,8 +43,33 @@ const deletePost = (req, res) => {
   })
 }
 
+const addLike = (req, res) => {
+  User.findById(req.params.userId, (err, foundUser) => {
+    if (err) return console.log(err);
+    Post.findById(req.params.postId, (err, foundPost) => {
+      Like.create({
+        posts: foundPost._id,
+        user: foundUser._id,
+      },
+      (err, createdLike) => {
+        foundPost.likes.push(createdLike._id);
+        foundPost.save()
+
+        foundUser.likes.push(createdLike._id);
+        foundUser.save()
+
+        res.redirect('/home')
+        // console.log("this is the user that made a like", foundUser);
+        console.log("this is the post that was liked:", foundPost);
+        // console.log("this is the like that was created:", createdLike)
+      })
+    })
+  })
+}
+
 module.exports = {
   newPost,
   createPost,
   deletePost,
+  addLike,
 };

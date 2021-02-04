@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Post, Like } = require("../models");
 const bcrypt = require("bcrypt");
 
 /* Presentational/Main */

@@ -10,7 +10,8 @@ const showHome = (req, res) => {
       posts,
       user: req.user,
     }
-    console.log("this is what i get with posts:", posts);
+    console.log("this is what i get with posts[0].likes:", posts[0].likes);
+    console.log("this is what i get with user:", req.user)
     res.render('home/index', context);
     // console.log("logging all of the req", req)
   })

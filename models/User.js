@@ -11,14 +11,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    username: {
-      type: String,
-      // required: true,
-    },
-    password: {
-      type: String,
-      // require: true,
-    },
+    // username: {
+    //   type: String,
+    //   required: true,
+    // },
+    // password: {
+    //   type: String,
+    //   require: true,
+    // },
     email: {
       type: String,
       required: true,
@@ -39,6 +39,12 @@ const userSchema = new Schema(
         ref: "Comment",
       },
     ],
+
+    likes: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'Like',
+    }],
+
     googleId: String,
   },
   {

@@ -101,6 +101,13 @@ body {
   font-size: 24px;
 }
 
+.likes-count {
+  display: flex;
+  align-self: flex-end;
+  margin-left: 180px;
+  font-size: 16px;
+}
+
 #logout-body {
   background: url("https://wallpapercave.com/wp/wp5063682.jpg");
   background-attachment: fixed;
