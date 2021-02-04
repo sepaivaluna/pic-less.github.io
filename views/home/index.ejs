@@ -1,18 +1,46 @@
 <%- include('../partials/header') %>
 
 <div class="container d-flex flex-column align-items-center">
-  <% posts.forEach(post => { %> 
-   <div id="post-container">
+  <% posts.forEach(post => { %>
+  <div id="post-container">
+    <div class="post-edit-div">
+      <img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>" />
+      <% if (user._id.equals(post.user._id)) { %>
+
+      <button
+        id="edit-button"
+        class="btn"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+      <% } %>
+    </div>
     <img src="<%= post.img %>" style="max-width: 500px; min-width: 500px" />
     <div class="d-flex">
       <form action="">
-        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like"><i class="far fa-heart"></i></button>
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like">
+          <i class="far fa-heart"></i>
+        </button>
       </form>
       <form action="/<%=post._id%>/comments" alt="view comments">
-        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Comments"><i class="far fa-comment"></i></button>
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Comments">
+          <i class="far fa-comment"></i>
+        </button>
       </form>
       <form class="align-self-end" action="">
-        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide post"><i class="far fa-eye-slash"></i></button>
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide post">
+          <i class="far fa-eye-slash"></i>
+        </button>
       </form>
     </div>
     <blockquote class="blockquote text-center">
@@ -20,6 +48,7 @@
       <footer class="blockquote-footer"><cite><%= post.user.firstName %> <%= post.user.lastName %></cite></footer>
     </blockquote>
   </div>
-  <% }); %> 
+  <% }); %>
 </div>
+
 <%- include('../partials/footer') %>

@@ -14,6 +14,7 @@ const postSchema = new Schema(
     caption: {
       type: String,
       required: true,
+      // maxlength: 10,
     },
     comments: [
       {

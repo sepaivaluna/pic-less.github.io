@@ -13,7 +13,7 @@ const showHome = (req, res) => {
     }
     console.log("this is what i get with posts:", posts);
     res.render('home/index', context);
-    console.log("logging all of the req", req)
+    // console.log("logging all of the req", req)
   })
 }
 
