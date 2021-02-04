@@ -67,6 +67,20 @@ const addLike = (req, res) => {
   })
 }
 
+const deleteLike = (req, res) => {
+  User.findById(req. params.userId, (err, foundUser) => {
+    if (err) return console.log(err);
+    Post.findById(req.params.postId, (err, foundPost) => {
+      Like.findByIdAndDelete(req.params.likeId, (err, deletedLike) => {
+        if (err) return console.log(err);
+
+        console.log('Delete the following like: ', deletedLike);
+        res.redirect('/home');
+      })
+    })
+  })
+}
+
 const showEdit = (req, res) => {
 
   Post.findById(req.params.postId, (err, foundPost) => {
@@ -104,4 +118,5 @@ module.exports = {
   addLike,
   showEdit,
   editPost,
+  deleteLike,
 };

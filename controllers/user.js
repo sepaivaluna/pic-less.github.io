@@ -131,10 +131,15 @@ const showProfile = (req, res) => {
     .populate({
       path: "posts",
       populate: {
-        path: 'comments',
+        path: "comments",
         populate: {
           path: 'user',
         }
+      }
+    }).populate({
+      path: 'likes',
+      populate: {
+        path: "posts"
       }
     })
     .exec((err, users) => {
@@ -147,6 +152,7 @@ const showProfile = (req, res) => {
       };
       // console.log("this is what i get when i log req.user:", req.user)
       // console.log("this is what i get when i populate users", users)
+      console.log("this is what i get when i populate users.likes", users)
       // console.log("this is what i get when i log users.posts", users.posts)
       // console.log("this is what i get when i log users.posts.comments", users.posts[0].comments)
 

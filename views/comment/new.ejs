@@ -1,27 +1,135 @@
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<h1>Add Comment</h1>
+    <!-- NOTE bootstrap css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
 
-<form action="/<%= user._id %>/<%= post._id %>/add-comment" method="POST">
-  <textarea name="content" cols="30" rows="5" placeholder="Type comment..."></textarea>
-  <button type="submit" class="btn btn-primary">Save</button>
-</form>
+    <!-- NOTE FontAwesome css -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+    <!-- NOTE Main css -->
+    <link rel="stylesheet" href="/style.css" />
+    <title>Pic-Less</title>
+
+    <!-- NOTE jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- NOTE Main js file -->
+    <script defer src="/js/script.js"></script>
+  </head>
+  <body id="comments-body">
+    <nav class="navbar navbar-2 sticky-top navbar-dark bg-dark d-flex justify-content-between">
+      <% if (user) { %>
+      <form action="/home">
+        <button type="submit" id="home-button-2">
+          <i style="color: rgb(26, 60, 80)" class="fas fa-camera-retro"></i>
+          Pic-Less
+        </button>
+      </form>
+      <% } %>
+      <div class="d-flex">
+        <h2 class="welcome-user">Welcome <%=user.firstName%>!</h2>
+        <div class="dropdown">
+          <button
+            id="dropdown-header"
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img class="profile-pic" src="<%= user.profilePic %>" />
+          </button>
+          <div
+            id="navbar-dropdown-menu"
+            style="text-align: center"
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <a class="dropdown-item" href="/home"
+              ><button class="navbar-buttons btn btn-primary"><i class="fas fa-home"></i> Home</button></a
+            >
+            <a class="dropdown-item" href="/user/<%= user._id %>/profile"
+              ><button class="navbar-buttons btn btn-secondary"><i class="fas fa-user-alt"></i> Profile</button></a
+            >
+            <a class="dropdown-item" href="/<%= user._id %>/new-post"
+              ><button class="navbar-buttons btn btn-success"><i class="fas fa-plus-square"></i> New</button></a
+            >
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout"
+              ><button class="navbar-buttons btn btn-danger">Log out <i class="fas fa-sign-out-alt"></i></button
+            ></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="row justify-content-around m-4">
+      <div class="col-4 text-center">
+        <img src="<%= post.img %>" style="width: auto; max-height: 600px; max-width: 500px;"/>
+        <% if (user._id.equals(post.user)) { %>
+          <form action="/<%= post._id %>/show-edit" method="GET">
+            <button type="submit" class="btn btn-primary m-2">Edit Post</button>
+          </form>
+        <% } %>
+      </div>
 
 
-
-
-
-<% post.comments.forEach(comment => { %>
-<ul class="container m-4">
-  <li class="d-flex"><%= comment.user.firstName %> <%= comment.user.lastName %>: <%= comment.content %>
-    <% if (user._id.equals(comment.user._id)) { %>
-        <form action="/<%= user._id %>/<%= post._id %>/<%=comment._id%>/delete?_method=DELETE" method="POST">
-            <button type="submit" class="btn" style="margin: -6px 0 0 5px; font-size: 16px; color: red;"><i class="far fa-trash-alt"></i></button>
-        </form>
-    <% } %>
-    </li>
-</ul>
-
-
-
-<% }); %> <%- include('../partials/footer') %>
+    <div class="col-4">
+      <form class="text-center" action="/<%= user._id %>/<%= post._id %>/add-comment" method="POST">
+        <textarea name="content" cols="55" rows="3" placeholder="Type comment..."></textarea>
+        <button style="width: 200px;" type="submit" class="btn btn-success">Save</button>
+      </form>
+      <h1 class="display-4 text-center all-comments-text">All comments:</h1>
+      <% if (post.comments.length === 0) { %>
+        <h3 class="text-center">No comments available</h3>
+      <% } %>
+        <% post.comments.forEach(comment => { %>
+        <table>
+          <tbody>
+            <tr><span class="comment-user-text"><strong><a id="user-comments" href="/user/<%=comment.user._id%>/profile"><%= comment.user.firstName %> <%= comment.user.lastName %></a>: </strong></span></tr>
+            <tr><%= comment.content %></tr>
+            <% if (user._id.equals(comment.user._id)) { %>
+              <tr>
+                <form action="/<%= user._id %>/<%= post._id %>/<%=comment._id%>/delete?_method=DELETE" method="POST">
+                  <button type="submit" style="margin: -6px 0 0 5px; font-size: 16px; color: red;" class="btn comment-delete-btn"><i class="far fa-trash-alt"></i></button>
+                </form>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      <% }); %>
+    </div>
+  </body>
+</html>
+            
+            
+            
+          

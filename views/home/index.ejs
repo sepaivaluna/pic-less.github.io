@@ -15,7 +15,7 @@
   <% posts.forEach(post => { %>
   <div id="post-container" class="current-post">
     <div class="post-edit-div">
-      <img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>" />
+      <a href="/user/<%=post.user._id%>/profile"><img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>" /></a>
       <% if (user._id.equals(post.user._id)) { %>
       
       <div class="btn-group dropright"> 
