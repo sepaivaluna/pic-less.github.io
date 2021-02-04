@@ -31,10 +31,10 @@
           <i class="fas fa-ellipsis-h"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <form class="dropdown-item" action="">
+          <form class="dropdown-item" action="/<%= post._id %>/show-edit" method="GET">
             <button type="submit" class="btn post-dropdown-options">Edit</button>
           </form>
-          <form class="dropdown-item" action="/<%=post._id%>/comments">
+          <form class="dropdown-item" action="/<%= post._id %>/comments">
             <button type="submit" class="btn post-dropdown-options">Comment</button>
           </form>
           <form class="dropdown-item" action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST"><button type="submit" class="btn post-dropdown-options">Delete</button></form>

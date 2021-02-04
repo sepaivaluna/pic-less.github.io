@@ -67,9 +67,41 @@ const addLike = (req, res) => {
   })
 }
 
+const showEdit = (req, res) => {
+
+  Post.findById(req.params.postId, (err, foundPost) => {
+    if(err) return console.log(err);
+    const context = {
+      user: req.user,
+      post: foundPost,
+    }
+    console.log(foundPost)
+    res.render('post/edit', context);
+  })
+}
+
+const editPost = (req, res) => {
+
+  Post.findByIdAndUpdate(req.params.postId, 
+    {$set: 
+      {... req.body},
+    },
+    {
+      new: true,
+    },
+    (err, updatePost) => {
+      if (err) return console.log(err);
+
+    res.redirect('/home');
+    console.log(updatePost);
+  });
+}
+
 module.exports = {
   newPost,
   createPost,
   deletePost,
   addLike,
+  showEdit,
+  editPost,
 };

@@ -7,6 +7,10 @@
   <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
+
+
+
+
 <% post.comments.forEach(comment => { %>
 <ul class="container m-4">
   <li class="d-flex"><%= comment.user.firstName %> <%= comment.user.lastName %>: <%= comment.content %>
@@ -17,4 +21,7 @@
     <% } %>
     </li>
 </ul>
+
+
+
 <% }); %> <%- include('../partials/footer') %>
