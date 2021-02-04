@@ -2,31 +2,57 @@
 
 <div class="welcome">
   <!-- <h4>Welcome to Pic-Less, a fun way to view your friend's posts or hide them without them knowing it!</h4> -->
-  <label>
-    <h3><%= title %>:</h3>
-  </label>
-  <!-- <p><%# message %></p> -->
+  <% if (!user) { %>
+  <div class="text-center">
+    <h1 class="display-3">Welcome to Pic-Less</h4>
+      <br>
+      <div>
+        <blockquote class="h3 text-center">An application inspired by instagram with a little twist. Enjoy.<br>
+          <cite>- Sergio Luna</cite>
+        </blockquote>
+      </div>
+      <br>
+      <label>
+        <h3 class="display-4"><%= title %>:</h3>
+      </label>
+      <br>
+      <div>
+        <form action="/auth/google">
+          <button class="btn btn-primary">Log in with Google</button>
+        </form>
+      </div>
+      <br>
+  </div>
 
-  <!-- <form action="/user/loginform" method="POST">
+
+  <!-- <p><%# message %></p>
+
+  <form action="/user/loginform" method="POST">
       <input type="username" name="username" placeholder="username" />
 
       <input type="password" name="password" placeholder="password" />
 
       <input type="submit" val="Log in" />
     </form>
-    <br /> -->
-  <div>
-    <h4>Use google to log in</h4>
-    <form action="/auth/google">
-      <button class="btn btn-primary">Log in with Google</button>
-    </form>
-  </div>
+    <br />
+    <div>
+        <label>
+          <h4>If you don't have an account click <a href="/user/register">Here</a></h4>
+        </label>
+      </div> -->
 
-  <!-- <div>
-      <label>
-        <h4>If you don't have an account click <a href="/user/register">Here</a></h4>
-      </label>
-    </div> -->
+<% } %>
+
+<% if (user) { %>
+
+  <h1 class="display-3">Welcome back <%= user.firstName %></h1>
+
+  <form action="/home">
+    <button type="submit" class="btn btn-primary">Home</button>
+  </form>
+
+<% } %>
+
 </div>
 
 <%- include('../partials/footer') %>

@@ -6,22 +6,22 @@
     <div class="post-edit-div">
       <img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>" />
       <% if (user._id.equals(post.user._id)) { %>
-
-      <button
-        id="edit-button"
-        class="btn"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <i class="fas fa-ellipsis-h"></i>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+      
+      <div class="btn-group dropright"> 
+        <button
+          id="edit-button"
+          class="btn"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <form class="dropdown-item" action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST"><button style="background-color: transparent; font-size: 18px;" type="submit" class="btn"><i class="far fa-trash-alt"></i> Delete</button></form>
+        </div>
       </div>
       <% } %>
     </div>

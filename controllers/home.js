@@ -1,4 +1,3 @@
-const e = require("express");
 const { Comment, User, Post } = require("../models");
 
 /* This will populate all of the posts and show their pictures w/ captions on the homepage */

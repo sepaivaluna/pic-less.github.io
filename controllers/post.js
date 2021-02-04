@@ -49,7 +49,19 @@ const createPost = (req, res) => {
   });
 };
 
+const deletePost = (req, res) => {
+  User.findById(req.params.userId, (err) => {
+    Post.findByIdAndDelete(req.params.postId, (err, deletedPost) => {
+      if (err) return console.log(err);
+
+      console.log('deleted the following post: ', deletedPost)
+      res.redirect('/home')
+    })
+  })
+}
+
 module.exports = {
   newPost,
   createPost,
+  deletePost,
 };
