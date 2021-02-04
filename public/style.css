@@ -79,10 +79,19 @@ body {
   margin: 6px;
 }
 
+.picture-background {
+  background-color:   rgba(209, 201, 164, 0.55);
+}
+
 #edit-button {
   border: none;
   background-color: transparent;
   font-size: 20px;
+}
+
+.post-dropdown-options {
+  background-color: transparent; 
+  font-size: 18px;
 }
 
 .post-icons {

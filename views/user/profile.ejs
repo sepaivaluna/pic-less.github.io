@@ -2,10 +2,10 @@
 
 <h1><%= title %></h1>
 
-<div class="d-flex">
+<div class="d-flex align-content-around flex-wrap">
 <% users.posts.forEach(post => { %>
 
-<div class="container">
+<div class="m-2">
     <img src="<%= post.img %>" style="width: 250px;">
     <div>
         <% post.comments.forEach(comment => { %>

@@ -15,23 +15,6 @@ const newPost = (req, res) => {
   });
 };
 
-// const createPost = (req, res) => {
-//   const id = req.params.userId;
-//   Post.create(req.body, (err, createdPost) => {
-//     if (err) return console.log(err);
-//     User.findById(id, (err, foundUser) => {
-//       createdPost.user = foundUser._id;
-//       createdPost.save();
-
-//       foundUser.posts.push(createdPost._id);
-//       foundUser.save();
-
-//       res.redirect("/home");
-//       console.log(foundUser);
-//     });
-//   });
-// };
-
 const createPost = (req, res) => {
   const id = req.params.userId;
   User.findById(id, (err, foundUser) => {
