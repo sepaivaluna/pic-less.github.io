@@ -18,7 +18,6 @@ const newComment = (req, res) => {
         user: req.user,
         post: thisPost,
       };
-      console.log("This is what i get from populating comments on a post", thisPost);
       res.render("comment/new", context);
     });
 };
@@ -35,7 +34,7 @@ const createComment = (req, res) => {
         foundPost.save();
 
         res.redirect(`/${foundPost._id}/comments`);
-        console.log("This is what i get from saving the comments into the post", foundPost);
+
       })
     })
   })
@@ -47,7 +46,6 @@ const deleteComment = (req, res) => {
       Comment.findByIdAndDelete(req.params.commentId, (err, deletedComment) => {
         if (err) return console.log(err)
 
-        console.log("deleted the following comment: ", deletedComment);
         res.redirect(`/${foundPost._id}/comments`);
       })
     })

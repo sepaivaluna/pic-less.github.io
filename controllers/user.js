@@ -58,10 +58,8 @@ const loginForm = (req, res) => {
           users,
           user: foundAUser,
         };
-        // console.log(users);
         res.render("home/index", context);
       });
-      // res.render("home/index", { user: foundAUser });
     });
   });
 };
@@ -78,8 +76,6 @@ const showRegister = (req, res) => {
 const newUserForm = (req, res) => {
   User.findOne({ email: req.body.email }, (err, foundAUser) => {
     if (err) return console.log(err);
-
-    console.log("Found user");
 
     if (foundAUser)
       return res.render("user/register", {
@@ -132,8 +128,6 @@ const showProfile = (req, res) => {
         users,
         title: 'Profile'
       };
-
-      console.log("this is what i get when i populate users.likes", users.likes)
 
       res.render("user/profile", context);
     });

@@ -9,7 +9,7 @@ router.post('/:userId/:postId/new-like', post.addLike);
 router.get('/:postId/show-edit', post.showEdit);
 router.put('/:postId/save-edit', post.editPost);
 
-router.delete('/:userId/:postId/:likeId/delete', post.deleteLike);
+router.delete('/:postId/:userId/:likeId/delete-like', post.deleteLike);
 
 router.delete('/:userId/:postId/delete', post.deletePost);
 

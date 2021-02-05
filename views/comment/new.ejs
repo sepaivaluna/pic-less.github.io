@@ -116,11 +116,11 @@
         <% post.comments.forEach(comment => { %>
         <table>
           <tbody>
-            <tr><span class="comment-user-text"><strong><a id="user-comments" href="/user/<%=comment.user._id%>/profile"><%= comment.user.firstName %> <%= comment.user.lastName %></a>: </strong></span></tr>
+            <tr><span class="comment-user-text"><strong><a id="user-comments" href="/user/<%=comment.user._id%>/profile"><img class="profile-pic" src="<%= comment.user.profilePic %>"/><%=comment.user.firstName%></a>: </strong></span></tr>
             <tr><%= comment.content %></tr>
             <% if (user._id.equals(comment.user._id)) { %>
               <tr>
-                <form action="/<%= user._id %>/<%= post._id %>/<%=comment._id%>/delete?_method=DELETE" method="POST">
+                <form action="/<%= user._id %>/<%= post._id %>/<%= comment._id %>/delete?_method=DELETE" method="POST">
                   <button type="submit" style="margin: -6px 0 0 5px; font-size: 16px; color: red;" class="btn comment-delete-btn"><i class="far fa-trash-alt"></i></button>
                 </form>
               </tr>
