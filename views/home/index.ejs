@@ -1,11 +1,11 @@
 <%- include('../partials/header') %>
 
 <!-- NOTE arr2 is used later on to compare with the id's of the liked posts, if there's a match then the like button will be disabled -->
-<h1 class="display-4 m-2 text-left">Home</h1>
+<h1 class="header-line display-4 m-2 text-left">Home</h1>
 <% arr2 = user.likes %>
 <% if (posts.length === 0) { %>
   <div class="container">
-  <h1 class="display-4 text-center">There are currently no posts, click below to make the first post!</h1>
+  <h1 class="currently-no-posts display-4 text-center">There are currently no posts, click below to make the first post!</h1>
   <form class="text-center"action="/<%= user._id %>/new-post">
     <button style="width: 200px;" class="btn btn-success">New Post</button>
   </form>

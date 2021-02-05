@@ -198,3 +198,38 @@ body {
   width: auto;
 }
 
+.currently-no-posts {
+  background-color: rgba(196, 187, 148, 0.712);
+}
+
+@media only screen and (max-width: 570px) {
+  
+  .navbar,
+  .navbar-2 {
+    min-width: 500px;
+  }
+
+  #home-button,
+  #home-button-2 {
+   font-size: 24px; 
+   margin: 2px;
+  }
+  .welcome-user {
+    font-size: 24px;
+    margin: 10px 5px;
+  }
+  .profile-pic {
+    max-width: 34px;
+    max-height: 34px;
+    border-radius: 200%;
+    margin: 2px;
+  }
+  .header-line {
+    text-align: center !important;
+    font-size: 50px !important;
+  }
+  .currently-no-posts {
+    font-size: 30px !important;
+  }
+
+}
