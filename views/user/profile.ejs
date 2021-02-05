@@ -1,23 +1,41 @@
 <%- include('../partials/header') %>
 
 <% if (user._id.equals(users._id)) { %>
-    <h1 class="display-4 m-2 text-right">My Profile</h1>
+    <h1 class="display-4 m-2 text-left">My Profile</h1>
 <% } if (!user._id.equals(users._id)) { %>
-    <h1 class="display-4 m-2 text-right"><%=users.firstName%>'s <%= title %></h1>
+    <h1 class="display-4 m-2 text-left"><%=users.firstName%>'s <%= title %></h1>
 <% } %> 
 
-<h1 class="text-center display-4">My Posts</h1>
+<% if (user._id.equals(users._id)) { %>
+    <h1 class="text-center display-3">My Posts</h1>
+<% } %>
+<% if (!user._id.equals(users._id)) { %>
+    <h1 class="text-center display-3">Posts</h1>
+<% } %>
+<% if (users.posts.length === 0) { %> 
+    <h1 class="text-center">No posts yet</h1>
+<% } %>
+
+
 <div class="m-4 d-flex justify-content-center flex-wrap">
     <% users.posts.forEach(post => { %>
 
         <div class="m-2">
-            <img class="pics-in-profile" src="<%= post.img %>" style="width: 250px;" />
+            <img class="pics-in-profile" src="<%= post.img %>" />
         </div>
     <% }) %>
 </div>
 
+<% if (user._id.equals(users._id)) { %>
 <h1 class="text-center display-4">My Liked Posts</h1>
+<% } %>
+<% if (!user._id.equals(users._id)) { %>
+    <h1 class="text-center display-3"><%= users.firstName %>'s Liked Posts</h1>
+<% } %>
 <div class="m-4 d-flex justify-content-center flex-wrap">
+    <% if (user.likes.length === 0) { %> 
+        <h1 class="text-center">No liked posts yet</h1>
+    <% } %>
     <% users.likes.forEach(likedPost => { %>
         <% likedPost.posts.forEach(pic => { %>
             

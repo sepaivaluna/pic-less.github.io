@@ -91,12 +91,14 @@
       </div>
     </nav>
 
+    <h1 class="display-4 m-2 text-left">Comments</h1>
+
     <div class="row justify-content-around m-4">
       <div class="col-4 text-center">
-        <img src="<%= post.img %>" style="width: auto; max-height: 600px; max-width: 500px;"/>
+        <img src="<%= post.img %>" style="width: auto; max-height: 600px; max-width: 500px; box-shadow: 10px 10px rgba(0, 0, 0, .2);"/> <br><br>
         <% if (user._id.equals(post.user)) { %>
           <form action="/<%= post._id %>/show-edit" method="GET">
-            <button type="submit" class="btn btn-primary m-2">Edit Post</button>
+            <button style="width: 200px;" type="submit" class="btn btn-primary m-2">Edit Post</button>
           </form>
         <% } %>
       </div>
@@ -104,12 +106,12 @@
 
     <div class="col-4">
       <form class="text-center" action="/<%= user._id %>/<%= post._id %>/add-comment" method="POST">
-        <textarea name="content" cols="55" rows="3" placeholder="Type comment..."></textarea>
+        <textarea name="content" cols="55" rows="3" placeholder="Type new comment..."></textarea>
         <button style="width: 200px;" type="submit" class="btn btn-success">Save</button>
       </form>
-      <h1 class="display-4 text-center all-comments-text">All comments:</h1>
+      <h1 class="text-center all-comments-text">All comments</h1>
       <% if (post.comments.length === 0) { %>
-        <h3 class="text-center">No comments available</h3>
+        <h3 class="text-center">No comments. Be the first to comment</h3>
       <% } %>
         <% post.comments.forEach(comment => { %>
         <table>

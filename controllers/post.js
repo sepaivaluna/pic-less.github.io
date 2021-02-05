@@ -74,7 +74,7 @@ const deleteLike = (req, res) => {
       Like.findByIdAndDelete(req.params.likeId, (err, deletedLike) => {
         if (err) return console.log(err);
 
-        console.log('Delete the following like: ', deletedLike);
+        console.log('Deleted the following like: ', deletedLike);
         res.redirect('/home');
       })
     })

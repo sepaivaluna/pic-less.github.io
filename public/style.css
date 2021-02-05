@@ -101,6 +101,7 @@ body {
   background: url("https://wallpaperaccess.com/full/1209558.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-position: right;
   background-size: cover;
 }
 
@@ -166,7 +167,7 @@ body {
 }
 
 #new-post-div {
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,3 +191,10 @@ body {
 #user-comments {
   color: black;
 }
+
+.pics-in-profile {
+  max-width: 250px;
+  max-height: 313px;
+  width: auto;
+}
+

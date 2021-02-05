@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
 
 
-<h1 class="text-center">Edit Post</h1>
+<h1 class="text-left display-4 m-2">Edit Post</h1>
 
 <div class="row justify-content-around">
   <div class="d-flex col-4 text-center justify-content-center flex-column">
     <h2 class="old-caption">"<%= post.caption %>"</h2>
     <form id="new-post-form" action="/<%= post._id %>/save-edit?_method=PUT" method="POST">
      <textarea name="caption" cols="50" rows="3" placeholder="New caption..."></textarea>
-        <button type="submit" class="btn btn-success m-2">Save</button>
+        <button style="width: 200px;" type="submit" class="btn btn-success m-2">Save</button>
     </form>
   </div>
 
@@ -16,7 +16,7 @@
     <img src="<%= post.img %>" style="width: auto; max-height: 500px; max-width: 500px;">
     <% if (user._id.equals(post.user)) { %>
       <form class="text-center" action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST">
-        <button type="submit" class="btn btn-danger m-2">Delete Post</button>
+        <button style="width: 200px;" type="submit" class="btn btn-danger m-2">Delete Post</button>
       </form>
     <% } %>
   </div>
