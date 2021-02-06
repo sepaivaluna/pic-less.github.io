@@ -32,16 +32,16 @@
 
 ## Technologies Used
 
-- Javascript
-- HTML
-- CSS
-- Mongoose
-- MongoDB
-- Express
-- Passport Google Oauth
-- EJS
-- Bootstrap
-- Popper
+  - Javascript
+  - HTML
+  - CSS
+  - Mongoose
+  - MongoDB
+  - Express
+  - Passport Google Oauth
+  - EJS
+  - Bootstrap
+  - Popper
 
 ## Getting Started
 
