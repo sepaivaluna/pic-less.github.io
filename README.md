@@ -10,6 +10,26 @@
 
 <p>Once a post has been made you have the option to edit or delete your posts. This will only be an available option if it's your post, otherwise you won't see the ellipses in the posts</p>
 
+<p>You also have the option to click on the comments and add a comment and redirect to another user's profile by clicking on their name.</p>
+
+<p>Have fun sharing pictures and comments with people!</p>
+
+## App Screenshots
+
+![screenshot](public/pictures/Main-Login.png)
+![screenshot](public/pictures/Home-Page.png)
+![screenshot](public/pictures/Profile.png)
+![screenshot](public/pictures/Comments.png)
+
+## App ERD
+
+![screenshot](public/pictures/ERD.png)
+
+
+## User Stories / Wireframe
+
+- [Trello](https://trello.com/b/z3AqpP5F/unit-2-project)
+
 ## Technologies Used
 
 - Javascript
