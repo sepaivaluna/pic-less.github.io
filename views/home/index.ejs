@@ -81,6 +81,12 @@
       <p>"<%= post.caption %>"</p>
       <footer class="blockquote-footer"><cite><%= post.user.firstName %> <%= post.user.lastName %></cite></footer>
     </blockquote>
+    <% if (post.comments.length === 1) { %> 
+      <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments">View <%=post.comments.length%> comment</a>
+    <% } %>
+    <% if (post.comments.length > 1) { %> 
+      <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments">View all <%=post.comments.length%> comments</a>
+    <% } %>
   </div>
   <% }); %>
 </div>

@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 
 /* Presentational/Main */
 const showLogin = (req, res) => {
-  res.render("user/login", {
+  const context = {
     user: req.user,
     title: "Log In",
-    message: "",
-  });
+  };
+  res.render("user/login", context);
 };
 
 /* Functional */
@@ -50,16 +50,16 @@ const loginForm = (req, res) => {
         });
       req.user = foundAUser;
       User.find({})
-      .populate("posts")
-      .exec((err, users) => {
-        if (err) return console.log(err);
-  
-        const context = {
-          users,
-          user: foundAUser,
-        };
-        res.render("home/index", context);
-      });
+        .populate("posts")
+        .exec((err, users) => {
+          if (err) return console.log(err);
+
+          const context = {
+            users,
+            user: foundAUser,
+          };
+          res.render("home/index", context);
+        });
     });
   });
 };
@@ -111,14 +111,15 @@ const showProfile = (req, res) => {
       populate: {
         path: "comments",
         populate: {
-          path: 'user',
-        }
-      }
-    }).populate({
-      path: 'likes',
+          path: "user",
+        },
+      },
+    })
+    .populate({
+      path: "likes",
       populate: {
-        path: "posts"
-      }
+        path: "posts",
+      },
     })
     .exec((err, users) => {
       if (err) return console.log(err);
@@ -126,13 +127,14 @@ const showProfile = (req, res) => {
       const context = {
         user: req.user,
         users,
-        title: 'Profile'
+        title: "Profile",
       };
 
       res.render("user/profile", context);
+      console.log("this is req.user", req.user);
+      console.log("this is user", users);
     });
 };
-
 
 const logout = (req, res) => {
   res.render("user/logout");

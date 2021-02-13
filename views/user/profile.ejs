@@ -33,7 +33,7 @@
     <h1 class="text-center display-3"><%= users.firstName %>'s Liked Posts</h1>
 <% } %>
 <div class="m-4 d-flex justify-content-center flex-wrap">
-    <% if (user.likes.length === 0) { %> 
+    <% if (users.likes.length === 0) { %> 
         <h1 class="text-center">No liked posts yet</h1>
     <% } %>
     <% users.likes.forEach(likedPost => { %>

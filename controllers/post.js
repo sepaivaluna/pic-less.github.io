@@ -1,5 +1,4 @@
 const { Post, User, Like } = require("../models");
-const user = require("./user");
 
 /* Presentational */
 const newPost = (req, res) => {
@@ -30,36 +29,54 @@ const createPost = (req, res) => {
   });
 };
 
+// const deletePost = (req, res) => {
+//   User.findById(req.params.userId, (err) => {
+//     Post.findByIdAndDelete(req.params.postId, (err, deletedPost) => {
+//       if (err) return console.log(err);
+
+//       res.redirect("/home");
+//     });
+//   });
+// };
+
 const deletePost = (req, res) => {
-  User.findById(req.params.userId, (err) => {
+  User.findById(req.params.userId, (err, foundUser) => {
     Post.findByIdAndDelete(req.params.postId, (err, deletedPost) => {
       if (err) return console.log(err);
 
-      res.redirect('/home')
-    })
-  })
-}
+      let idx = req.user.posts.indexOf(deletedPost._id);
+
+      if (idx !== -1) req.user.posts.splice(idx, 1);
+
+      req.user.save();
+
+      res.redirect("/home");
+    });
+  });
+};
 
 const addLike = (req, res) => {
   User.findById(req.params.userId, (err, foundUser) => {
     if (err) return console.log(err);
     Post.findById(req.params.postId, (err, foundPost) => {
-      Like.create({
-        posts: foundPost._id,
-        user: foundUser._id,
-      },
-      (err, createdLike) => {
-        foundPost.likes.push(createdLike._id);
-        foundPost.save()
+      Like.create(
+        {
+          posts: foundPost._id,
+          user: foundUser._id,
+        },
+        (err, createdLike) => {
+          foundPost.likes.push(createdLike._id);
+          foundPost.save();
 
-        foundUser.likes.push(createdLike._id);
-        foundUser.save()
+          foundUser.likes.push(createdLike._id);
+          foundUser.save();
 
-        res.redirect('/home')
-      })
-    })
-  })
-}
+          res.redirect("/home");
+        }
+      );
+    });
+  });
+};
 
 // const deleteLike = (req, res) => {
 //   User.findById(req.params.userId, (err, foundUser) => {
@@ -82,40 +99,46 @@ const deleteLike = (req, res) => {
       Like.findByIdAndDelete(req.params.likeId, (err, deletedLike) => {
         if (err) return console.log(err);
 
-        console.log('Deleted the following like: ', deletedLike);
-        res.redirect('/home');
-      })
-    })
-  })
-}
+        let idx = foundPost.likes.indexOf(deletedLike._id);
+        let idx2 = foundUser.likes.indexOf(deletedLike._id);
+        // let idx3 = req.user.likes.indexOf(deletedLike._id);
+
+        if (idx !== -1) foundPost.likes.splice(idx, 1);
+        if (idx2 !== -1) foundUser.likes.splice(idx2, 1);
+        // if (idx3 !== -1) foundUser.likes.splice(idx3, 1);
+
+        console.log("Deleted the following like: ", deletedLike);
+        res.redirect("/home");
+      });
+    });
+  });
+};
 
 const showEdit = (req, res) => {
-
   Post.findById(req.params.postId, (err, foundPost) => {
-    if(err) return console.log(err);
+    if (err) return console.log(err);
     const context = {
       user: req.user,
       post: foundPost,
-    }
-    res.render('post/edit', context);
-  })
-}
+    };
+    res.render("post/edit", context);
+  });
+};
 
 const editPost = (req, res) => {
-
-  Post.findByIdAndUpdate(req.params.postId, 
-    {$set: 
-      {... req.body},
-    },
+  Post.findByIdAndUpdate(
+    req.params.postId,
+    { $set: { ...req.body } },
     {
       new: true,
     },
     (err, updatePost) => {
       if (err) return console.log(err);
 
-    res.redirect('/home');
-  });
-}
+      res.redirect("/home");
+    }
+  );
+};
 
 module.exports = {
   newPost,

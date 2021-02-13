@@ -1,9 +1,13 @@
 #comments-body {
-  background: url('https://images.unsplash.com/photo-1517758478390-c89333af4642?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMHNreXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80');
+  background: url("https://images.unsplash.com/photo-1517758478390-c89333af4642?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMHNreXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+}
+
+.view-comments-text {
+  margin: 10px;
 }
 
 .comment-user-text {
@@ -11,8 +15,8 @@
 }
 
 .comment-delete-btn {
-  margin: -6px 0 0 5px; 
-  font-size: 16px; 
+  margin: -6px 0 0 5px;
+  font-size: 16px;
   color: red;
   background-color: transparent;
   padding: none;
@@ -116,7 +120,7 @@ body {
 }
 
 .picture-background {
-  background-color:   rgba(209, 201, 164, 0.55);
+  background-color: rgba(209, 201, 164, 0.55);
 }
 
 #edit-button {
@@ -126,14 +130,14 @@ body {
 }
 
 .post-dropdown-options {
-  background-color: transparent; 
+  background-color: transparent;
   font-size: 18px;
 }
 
 .post-icons {
-  border: none; 
-  background-color: transparent; 
-  color: rgb(59, 0, 0); 
+  border: none;
+  background-color: transparent;
+  color: rgb(59, 0, 0);
   font-size: 24px;
 }
 
@@ -203,7 +207,6 @@ body {
 }
 
 @media only screen and (max-width: 570px) {
-  
   .navbar,
   .navbar-2 {
     min-width: 500px;
@@ -211,8 +214,8 @@ body {
 
   #home-button,
   #home-button-2 {
-   font-size: 24px; 
-   margin: 2px;
+    font-size: 24px;
+    margin: 2px;
   }
   .welcome-user {
     font-size: 24px;
