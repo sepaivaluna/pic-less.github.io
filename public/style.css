@@ -206,6 +206,31 @@ body {
   background-color: rgba(196, 187, 148, 0.712);
 }
 
+.liked-heart {
+  color: rgba(189, 1, 1, 0.76);
+}
+
+.input-field {
+  width: 260px;
+  background-color: rgba(196, 187, 148, 0.712);
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 5px 5px 20px black;
+}
+
+.textarea {
+  background-color: rgba(196, 187, 148, 0.712);
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 5px 5px 20px black;
+  padding: 10px
+}
+
+.input-field::placeholder,
+.textarea::placeholder {
+  text-align: left;
+}
+
 @media only screen and (max-width: 570px) {
   .navbar,
   .navbar-2 {

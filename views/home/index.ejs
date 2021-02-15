@@ -2,12 +2,14 @@
 
 <!-- NOTE arr2 is used later on to compare with the id's of the liked posts, if there's a match then the like button will be disabled -->
 <h1 class="header-line display-4 m-2 text-left">Home</h1>
-<% arr2 = user.likes %>
+<% arr2 = user.likes %> 
 <% if (posts.length === 0) { %>
-  <div class="container">
-  <h1 class="currently-no-posts display-4 text-center">There are currently no posts, click below to make the first post!</h1>
-  <form class="text-center"action="/<%= user._id %>/new-post">
-    <button style="width: 200px;" class="btn btn-success">New Post</button>
+<div class="container">
+  <h1 class="currently-no-posts display-4 text-center">
+    There are currently no posts, click below to make the first post!
+  </h1>
+  <form class="text-center" action="/<%= user._id %>/new-post">
+    <button style="width: 200px" class="btn btn-success">New Post</button>
   </form>
 </div>
 <% } %>
@@ -15,10 +17,12 @@
   <% posts.forEach(post => { %>
   <div id="post-container" class="current-post">
     <div class="post-edit-div">
-      <a href="/user/<%=post.user._id%>/profile"><img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>" /></a>
+      <a href="/user/<%=post.user._id%>/profile"
+        ><img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>"
+      /></a>
       <% if (user._id.equals(post.user._id)) { %>
-      
-      <div class="btn-group dropright"> 
+
+      <div class="btn-group dropright">
         <button
           id="edit-button"
           class="btn"
@@ -37,43 +41,66 @@
           <form action="/<%= post._id %>/comments">
             <button type="submit" class="btn post-dropdown-options dropdown-item text-center">Comment</button>
           </form>
-          <form action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST"><button type="submit" class="btn post-dropdown-options dropdown-item text-center">Delete</button></form>
+          <form action="/<%= user._id %>/<%= post._id %>/delete?_method=DELETE" method="POST">
+            <button type="submit" class="btn post-dropdown-options dropdown-item text-center">Delete</button>
+          </form>
         </div>
       </div>
       <% } %>
     </div>
     <div class="picture-background d-flex justify-content-center">
-      <img src="<%= post.img %>" style="width: auto; max-height: 400px; max-width: 500px;" />
+      <img src="<%= post.img %>" style="width: auto; max-height: 400px; max-width: 500px" />
     </div>
     <div class="d-flex">
-      <% arr1 = post.likes %>
-      <form action="/<%= user._id%>/<%= post._id %>/new-like" method="POST">
+      <% arr1 = post.likes %> 
+      <% let arr3 = arr1.filter(like => arr2.includes(like)) %>
+      
+      <% if (arr3.length > 0) { %>
+      <form action="/<%= post._id %>/<%= user._id %>/<%= arr3[0] %>/delete-like?_method=DELETE" method="POST">
         <button
-        <% const found = arr1.some(r=> arr2.indexOf(r) >= 0) %>
-        <% if (found === true) { %>
-          disabled style="color: red; fill: red;"
-        <% } %>
-         type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like">
-         <i class="far fa-heart"></i>
+          type="submit"
+          class="btn post-icons"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Like"
+        >
+        <i class="fas fa-heart liked-heart"></i>
         </button>
       </form>
+      <% } %> 
+      
+      <% if (arr3.length === 0) { %>
+      <form action="/<%= user._id%>/<%= post._id %>/new-like" method="POST">
+        <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like">
+          <i class="far fa-heart"></i>
+        </button>
+      </form>
+      <% } %>
+
       <form action="/<%=post._id%>/comments" alt="view comments">
         <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Comments">
           <i class="far fa-comment"></i>
         </button>
       </form>
       <form action="">
-        <button id="hide-button" type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide post">
+        <button
+          id="hide-button"
+          type="submit"
+          class="btn post-icons"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Hide post"
+        >
           <i class="far fa-eye-slash"></i>
         </button>
       </form>
       <div class="likes-count">
         <% if (post.likes.length === 0) { %>
-          <p>This post has no likes</p>
+        <p>This post has no likes</p>
         <% } if (post.likes.length === 1) { %>
-          <p>This post has 1 like</p>
+        <p>This post has 1 like</p>
         <% } if (post.likes.length > 1) { %>
-          <p>This post has <%= post.likes.length %> likes</p>
+        <p>This post has <%= post.likes.length %> likes</p>
         <% } %>
       </div>
     </div>
@@ -81,11 +108,14 @@
       <p>"<%= post.caption %>"</p>
       <footer class="blockquote-footer"><cite><%= post.user.firstName %> <%= post.user.lastName %></cite></footer>
     </blockquote>
-    <% if (post.comments.length === 1) { %> 
-      <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments">View <%=post.comments.length%> comment</a>
-    <% } %>
-    <% if (post.comments.length > 1) { %> 
-      <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments">View all <%=post.comments.length%> comments</a>
+    <% if (post.comments.length === 1) { %>
+    <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments"
+      >View <%=post.comments.length%> comment</a
+    >
+    <% } %> <% if (post.comments.length > 1) { %>
+    <a class="view-comments-text text-secondary" href="/<%=post._id%>/comments"
+      >View all <%=post.comments.length%> comments</a
+    >
     <% } %>
   </div>
   <% }); %>

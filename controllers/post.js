@@ -78,20 +78,6 @@ const addLike = (req, res) => {
   });
 };
 
-// const deleteLike = (req, res) => {
-//   User.findById(req.params.userId, (err, foundUser) => {
-//     if (err) return console.log(err);
-//     Post.findById(req.params.postId, (err, foundPost) => {
-//       Like.findByIdAndDelete(req.params.likeId, (err, deletedLike) => {
-//         if (err) return console.log(err);
-
-//         console.log('Deleted the following like: ', deletedLike);
-//         res.redirect('/home');
-//       })
-//     })
-//   })
-// }
-
 const deleteLike = (req, res) => {
   Post.findById(req.params.postId, (err, foundPost) => {
     if (err) return console.log(err);
@@ -101,11 +87,15 @@ const deleteLike = (req, res) => {
 
         let idx = foundPost.likes.indexOf(deletedLike._id);
         let idx2 = foundUser.likes.indexOf(deletedLike._id);
-        // let idx3 = req.user.likes.indexOf(deletedLike._id);
+        let idx3 = req.user.likes.indexOf(deletedLike._id);
 
         if (idx !== -1) foundPost.likes.splice(idx, 1);
         if (idx2 !== -1) foundUser.likes.splice(idx2, 1);
-        // if (idx3 !== -1) foundUser.likes.splice(idx3, 1);
+        if (idx3 !== -1) foundUser.likes.splice(idx3, 1);
+
+        foundPost.save()
+        foundUser.save()
+        req.user.save()
 
         console.log("Deleted the following like: ", deletedLike);
         res.redirect("/home");
