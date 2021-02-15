@@ -1,18 +1,21 @@
-// const hideButton = document.getElementById('hide-button');
+const inputUrl = document.getElementById('new-post-url');
+const inputCaption = document.getElementById('new-post-caption');
+const enteredUrl = document.getElementById('entered-url');
+const enteredCaption = document.getElementById('entered-caption');
 
-// hideButton.addEventListener('click', (e) => {
-//     console.log('You clicked me')
-// })
 
+inputCaption.oninput = () => {
+    enteredCaption.innerHTML = inputCaption.value;
+};
 
-// const currentPost = document.querySelector('.current-post');
+inputUrl.oninput = () => {
+    enteredUrl.setAttribute('src', inputUrl.value);
+    console.log(inputUrl.value)
+}
 
-// currentPost.addEventListener('click', (e) => {
-//     console.log('Current post')
-// })
-
-// const hidePost = () => {
-//    return currentPost.style.display = 'none';
-// }
-
-// hideButton.addEventListener('click', hidePost);
+if (inputUrl.value === '') {
+    enteredUrl.removeAttribute('src');
+    enteredUrl.setAttribute('src', 'https://media.musclegrid.io/karate4jax.com/uploads/2017/04/26233456/default-image-800x600.jpg')
+    
+    console.log(inputUrl.value)
+}

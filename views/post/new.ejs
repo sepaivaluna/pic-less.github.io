@@ -2,20 +2,40 @@
 
 <h1 class="header-line text-left display-4 m-2">New Post</h1>
 
-<div id="new-post-div">
-  <form id="new-post-form" action="/<%= user._id %>/add-post" method="POST">
-    <div>
-      <input class="input-field" type="text" name="img" placeholder="img-url" />
+
+<div class="row justify-content-around">
+  <div class="d-flex col-4 text-center justify-content-center flex-column">
+    <div id="new-post-div">
+      <form id="new-post-form" action="/<%= user._id %>/add-post" method="POST">
+        <div>
+          <input id="new-post-url" class="input-field" type="text" name="img" placeholder="img-url" />
+        </div>
+        <br />
+        <div>
+          <textarea id="new-post-caption" class="textarea" name="caption" cols="36" rows="3" placeholder="Type your caption..."></textarea>
+        </div>
+        <br />
+        <div>
+          <button style="width: 200px;" type="submit" class="btn btn-success">Post</button>
+        </div>
+        
+      </form>
     </div>
-    <br />
-    <div>
-      <textarea class="textarea" name="caption" cols="36" rows="3" placeholder="Type your caption..."></textarea>
+  </div>
+
+
+  <div class="d-flex col-4 text-center justify-content-center flex-column">
+    <div class="post-container">
+      <div class="picture-background">
+        <img id="entered-url" style="width: auto; max-height: 400px; max-width: 500px">
+      </div>
+      <div>
+        <blockquote class="blockquote text-center">
+          <p id="entered-caption" ></p>
+        </blockquote>
+      </div>
     </div>
-    <br />
-    <div>
-      <button style="width: 200px;" type="submit" class="btn btn-success">Post</button>
-    </div>
-  </form>
+  </div>
 </div>
 
 <%- include('../partials/footer') %>

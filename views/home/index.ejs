@@ -15,7 +15,7 @@
 <% } %>
 <div class="container d-flex flex-column align-items-center">
   <% posts.forEach(post => { %>
-  <div id="post-container" class="current-post">
+  <div class="current-post post-container">
     <div class="post-edit-div">
       <a href="/user/<%=post.user._id%>/profile"
         ><img class="profile-pic" src="<%= post.user.profilePic %>" alt="<%=post.user.firstName%>"
@@ -54,6 +54,9 @@
     <div class="d-flex">
       <% arr1 = post.likes %> 
       <% let arr3 = arr1.filter(like => arr2.includes(like)) %>
+
+      <% console.log("this is arr3", arr3) %>
+      <% console.log("this is the other", user.likes.indexOf(arr3[0])) %>
       
       <% if (arr3.length > 0) { %>
       <form action="/<%= post._id %>/<%= user._id %>/<%= arr3[0] %>/delete-like?_method=DELETE" method="POST">
@@ -68,7 +71,7 @@
         </button>
       </form>
       <% } %> 
-      
+
       <% if (arr3.length === 0) { %>
       <form action="/<%= user._id%>/<%= post._id %>/new-like" method="POST">
         <button type="submit" class="btn post-icons" data-bs-toggle="tooltip" data-bs-placement="top" title="Like">
